@@ -1,5 +1,0 @@
--------------------------------------------------------------------------------
-Test set: TestProjet$TestCalculDroitEnregistrement
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.487 s -- in TestProjet$TestCalculDroitEnregistrement
-TestProjet$TestCalculDroitEnregistrement.calculDroitEnregistrementRevenuCadastralInferieur745 -- Time elapsed: 0.418 s

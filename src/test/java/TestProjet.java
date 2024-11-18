@@ -62,7 +62,11 @@ public class TestProjet {
             projet.setFraisTransformation(fraisTransformation);
             Assertions.assertThrows(Exception.class, () -> projet.calculTVAFraisTransformation());
         }
+    }
 
+    @Nested
+    @DisplayName("Test de la classe Calcul du droit de l'abbatement")
+    class TestCalculDroitAbbatement {
         @ParameterizedTest
         @CsvSource({"200_000, 40_000", "400_000, 33_333.33", "500_000, 20_000", "600_000, 20_000"})
         @DisplayName("Calcul de l'abbatement")
@@ -73,7 +77,7 @@ public class TestProjet {
     }
 
     @Nested
-    @DisplayName("Calcul du droit d'enregistrement")
+    @DisplayName("Test de la classe Calcul du droit d'enregistrement")
     class TestCalculDroitEnregistrement {
         @Test
         @DisplayName("Calcul du droit d'enregistrement : Revenu Cadastral inferieur à 745")
