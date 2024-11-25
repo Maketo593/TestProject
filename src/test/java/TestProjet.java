@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -24,37 +23,23 @@ public class TestProjet {
     @Nested
     @DisplayName("Test de la classe Calcul de la TVA sur les frais de transformation")
     class TestCalculTVA {
-        @Test
+        @ParameterizedTest
+        @CsvSource({"90_000.00, 5_400.00", "0.00, 0.00", "100_000.00, 6_000.00", "59_595.00, 3_575.70", "1.00, 0.06"})
         @DisplayName("Calcul de la tva sur les frais de transformation : Validation des frais positifs")
-        public void testCalculTVA() {
-            Assertions.assertAll(() -> {
-                projet.setFraisTransformation(90_000.00);
-                Assertions.assertEquals(5_400.00, projet.calculTVAFraisTransformation());
-            }, () -> {
-                projet.setFraisTransformation(0.00);
-                Assertions.assertEquals(0.00, projet.calculTVAFraisTransformation());
-            }, () -> {
-                projet.setFraisTransformation(100_000.00);
-                Assertions.assertEquals(6_000.00, projet.calculTVAFraisTransformation());
-            }, () -> {
-                projet.setFraisTransformation(59_595.00);
-                Assertions.assertEquals(3_575.70, projet.calculTVAFraisTransformation());
-            }, () -> {
-                projet.setFraisTransformation(1.00);
-                Assertions.assertEquals(0.06, projet.calculTVAFraisTransformation());
-            });
+        public void testCalculTVA( double fraisTransformation, double resultat) {
+            projet.setFraisTransformation(fraisTransformation);
+            Assertions.assertEquals(resultat, projet.calculTVAFraisTransformation());
         }
 
-        @Test
+
+        @ParameterizedTest
+        @CsvSource({"92_123.89, 5_527.4334"})
         @DisplayName("Calcul de la tva sur les frais de transformation : Validation des frais arrondis")
-        public void testCalculTVA2() {
-            Assertions.assertAll(() -> {
-                projet.setFraisTransformation(92_123.89);
-                Assertions.assertEquals(5_527.4334, projet.calculTVAFraisTransformation());
-            });
+        public void testCalculTVA2( double fraisTransformation, double resultat) {
+            projet.setFraisTransformation(fraisTransformation);
+            Assertions.assertEquals(resultat, projet.calculTVAFraisTransformation());
         }
 
-        @Disabled
         @ParameterizedTest
         @ValueSource(doubles = { -90_000.00, -25_000.00})
         @DisplayName("Calcul de la tva sur les frais de transformation : Validation des frais negatifs")
