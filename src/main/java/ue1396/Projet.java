@@ -61,7 +61,7 @@ public class Projet {
     /**
      * Calcule l'abattement fiscal possible. 
      * @return double abattement
-     */
+     */ 
     public double calculAbattement(){
         if (this.prixHabitation < 350_000) return 40_000;
         if (this.prixHabitation >= 500_000) return 20_000;
