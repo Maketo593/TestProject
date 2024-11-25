@@ -64,14 +64,27 @@ public class TestProjet {
     @Nested
     @DisplayName("Test de la classe Calcul du droit d'enregistrement")
     class TestCalculDroitEnregistrement {
-        @Test
+        @ParameterizedTest
+        @CsvSource({"350_000.00, 40_000.00, 740, 18_599.999584257603", "180_000.00, 40_000.00, 575, 8_400.00", "100_000.00, 40_000.00, 700, 3_600.00"})
         @DisplayName("Calcul du droit d'enregistrement : Revenu Cadastral inferieur à 745")
-        public void calculDroitEnregistrementRevenuCadastralInferieur745(){
+        public void calculDroitEnregistrementRevenuCadastralInferieur745( double prixHabitation, double abattement, int revenuCadastral, double resultat) {
             Assertions.assertAll(() -> {
-                mockedProject.setPrixHabitation(350_000.00);
-                Mockito.doReturn(40_000.00).when(mockedProject).calculAbattement();
-                mockedProject.setRevenuCadastral(740);
-                Assertions.assertEquals(18_599.999584257603, mockedProject.calculDroitEnregistrement());
+                mockedProject.setPrixHabitation(prixHabitation);
+                Mockito.doReturn(abattement).when(mockedProject).calculAbattement();
+                mockedProject.setRevenuCadastral(revenuCadastral);
+                Assertions.assertEquals(resultat, mockedProject.calculDroitEnregistrement(), 0.001);
+            });
+        }
+
+        @ParameterizedTest
+        @CsvSource({"400_000.00, 33_333.333, 746, 45_833.333"})
+        @DisplayName("Calcul du droit d'enregistrement : Revenu Cadastral superieur à 745")
+        public void calculDroitEnregistrementRevenuCadastralSuperieur745( double prixHabitation, double abattement, int revenuCadastral, double resultat) {
+            Assertions.assertAll(() -> {
+                mockedProject.setPrixHabitation(prixHabitation);
+                Mockito.doReturn(abattement).when(mockedProject).calculAbattement();
+                mockedProject.setRevenuCadastral(revenuCadastral);
+                Assertions.assertEquals(resultat, mockedProject.calculDroitEnregistrement(), 0.001);
             });
         }
     }
