@@ -29,7 +29,7 @@ public class ITApp {
     }
     
     @Test
-    @DisplayName("Calcul total du projet d'achat : Validation du meilleur scénario")
+    @DisplayName("Calcul total du projet d'achat + Apport minimal + Reste à emprunter: Validation des scénarios")
     public void calculTotalProjetAchatHappyPath() {
         Projet projetBasDeGamme = new Projet();
         Projet projetNominal = new Projet();
@@ -52,10 +52,13 @@ public class ITApp {
         Assertions.assertAll(
             () -> Assertions.assertEquals(161_100.00, projetBasDeGamme.calculTotalProjetAchat(), 0.0001),
             () -> Assertions.assertEquals(23_400.00, projetBasDeGamme.calculApportMinimal(), 0.0001),
+            () -> Assertions.assertEquals(137_700.00, projetBasDeGamme.calculResteAEmprunter()),
             () -> Assertions.assertEquals(378_600.00, projetNominal.calculTotalProjetAchat(), 0.001),
             () -> Assertions.assertEquals(60_900.00, projetNominal.calculApportMinimal(), 0.001),
+            () -> Assertions.assertEquals(317_700.00, projetNominal.calculResteAEmprunter()),
             () -> Assertions.assertEquals(803_500.00, projetHautDeGamme.calculTotalProjetAchat(), 0.0001),
-            () -> Assertions.assertEquals(168_100.00, projetHautDeGamme.calculApportMinimal(), 0.0001)
+            () -> Assertions.assertEquals(168_100.00, projetHautDeGamme.calculApportMinimal(), 0.0001),
+            () -> Assertions.assertEquals(635_400.00, projetHautDeGamme.calculResteAEmprunter())
         );
     }
 }

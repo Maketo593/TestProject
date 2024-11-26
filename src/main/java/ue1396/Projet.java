@@ -73,9 +73,6 @@ public class Projet {
      * @return doube TVA
      */
     public double calculTVAFraisTransformation(){
-        if (this.fraisTransformation < 0) {
-            throw new IllegalArgumentException("Les frais de transformation ne peuvent pas etre négatives !");
-        }
         return 0.06 * this.fraisTransformation;
     }
 
