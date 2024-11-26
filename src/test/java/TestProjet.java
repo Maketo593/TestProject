@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.ClassOrderer;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Order;
@@ -103,13 +104,13 @@ public class TestProjet {
     @DisplayName("Calcul total du projet d'achat ")
     class TestCalculTotalProjetAchat {
         @ParameterizedTest
-        @CsvSource({"100_000.00, 4_500.00, 3_600.00, 50_000.00, 3_600.00, 161_700.00"})
+        @CsvSource({"100_000.00, 700, 4_500.00, 3_600.00, 50_000.00, 3_000.00, 161_100.00"})
         @DisplayName("(Mockito)")
-        public void testCalculTotalProjetAchat(double prixHabitation, double fraisNotaireAchat, double calculDroitEnregistrement, double fraisTransformation, double tvaFraisTransformation, double resultat) {
+        public void testCalculTotalProjetAchat(double prixHabitation, int revenuCadastral,double fraisNotaireAchat, double calculDroitEnregistrement, double fraisTransformation, double tvaFraisTransformation, double resultat) {
             mockedProject.setPrixHabitation(prixHabitation);
             mockedProject.setFraisTransformation(fraisTransformation);
             mockedProject.setFraisNotaireAchat(fraisNotaireAchat);
-            mockedProject.setRevenuCadastral(700);
+            mockedProject.setRevenuCadastral(revenuCadastral);
             Mockito.doReturn(tvaFraisTransformation).when(mockedProject).calculTVAFraisTransformation();
             Mockito.doReturn(calculDroitEnregistrement).when(mockedProject).calculDroitEnregistrement();
             Assertions.assertEquals(resultat, mockedProject.calculTotalProjetAchat());
